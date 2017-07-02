@@ -1,0 +1,18 @@
+{
+    "name": "GruposDeAcesso",
+    "alias": "gruposdeacesso",
+    "description": "Grupos de acesso com permissões de usuarios.",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\GruposDeAcesso\\Providers\\GruposDeAcessoServiceProvider"
+    ],
+    "aliases": {
+        "HelperGrupos": "Modules\\GruposDeAcesso\\Helpers\\HelperGrupos::class"
+    },
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
