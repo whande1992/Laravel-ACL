@@ -30,23 +30,25 @@ class GruposDeAcessoServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
 
-        /*Retorna todos os Grupos que estão ligados a cada permissão*/
+        /*Verifica se a tabela existe para fazer a validação de acessos*/
+        if (Schema::hasTable('permissions')) {
+            /*Retorna todos os Grupos que estão ligados a cada permissão*/
 
-        $permissions = Permission::with('roles')->get();
+            $permissions = Permission::with('roles')->get();
 
-        foreach ( $permissions as $permission)
-        {
-            Gate::define($permission->nome, function (User $user) use ($permission) {
-                return $user->hasPermission($permission);
+            foreach ($permissions as $permission) {
+                Gate::define($permission->nome, function (User $user) use ($permission) {
+                    return $user->hasPermission($permission);
+                });
+            }
+
+            Gate::before(function (user $user) {
+
+                if ($user->hasAnyRoles('Administrador'))
+                    return true;
+
             });
         }
-
-        Gate::before(function (user $user){
-
-            if ( $user->hasAnyRoles('Administrador') )
-                return true;
-
-        });
     }
 
     /**
