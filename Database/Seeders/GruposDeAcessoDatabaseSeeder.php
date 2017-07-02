@@ -26,8 +26,8 @@ class GruposDeAcessoDatabaseSeeder extends Seeder
         /*Cadastra permissões*/
         DB::table('permissions')->insert([
             ['id' => 1,'nome' => 'viewGrupos','descricao'=>'Permite visualizar os grupos de usuários.','permissiongroup_id'=>1 ],
-            ['id' => 1,'nome' => 'editGrupos','descricao'=>'Permite editar o cadastro de grupos e permissões.','permissiongroup_id'=>1 ],
-            ['id' => 1,'nome' => 'createGrupos','descricao'=>'Permite cadastrar um novo grupo/usuário','permissiongroup_id'=>1 ],
+            ['id' => 2,'nome' => 'editGrupos','descricao'=>'Permite editar o cadastro de grupos e permissões.','permissiongroup_id'=>1 ],
+            ['id' => 3,'nome' => 'createGrupos','descricao'=>'Permite cadastrar um novo grupo/usuário','permissiongroup_id'=>1 ],
         ]);
         /*Cria um grupo padrão de adminsitrador*/
         DB::table('roles')->insert(
