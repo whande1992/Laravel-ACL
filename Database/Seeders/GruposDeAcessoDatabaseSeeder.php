@@ -5,6 +5,7 @@ namespace Modules\GruposDeAcesso\Database\Seeders;
 use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Modules\GruposDeAcesso\Entities\PermissionGroup;
 
 class GruposDeAcessoDatabaseSeeder extends Seeder
