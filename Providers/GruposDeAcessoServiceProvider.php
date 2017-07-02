@@ -4,6 +4,7 @@ namespace Modules\GruposDeAcesso\Providers;
 
 use App\User;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\GruposDeAcesso\Entities\Permission;
