@@ -61,6 +61,17 @@ Mudar enabled para true.
     
 10 - Configurar o layout principal app.blade.php, na linha 56
  @include('sweet::alert')'
+ 
+ Na linha 44
+ 
+      @if ($errors->any())
+            <script>
+                swal(   'Atenção!',
+                        ' {!! $errors->first() !!} ',
+                        'error'
+                    )
+            </script>
+        @endif
   
 
 11 - Configurar o acesso ao banco de dados e a engine do banco config\database mysql. 
