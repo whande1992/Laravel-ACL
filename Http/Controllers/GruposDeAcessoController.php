@@ -2,6 +2,8 @@
 
 namespace Modules\GruposDeAcesso\Http\Controllers;
 
+
+use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -38,16 +40,29 @@ class GruposDeAcessoController extends Controller
             $request->nome <> 'administrador'
         ) {
 
+            /*Valida as informações se estao de acordo*/
+            $validator = Validator::make($request->all(), [
+                'nome' => 'required|max:100',
+                'descricao' => 'required',
+            ]);
+            /*Caso tenha erros, retorna com uma mensagem, e ao abrir o model e mostrado os dados digitados */
+            if ($validator->fails()) {
+
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
             /*Cadastra uma nova role se o nome for diferente de admin*/
             $role = new Role;
             $role->nome = $request->nome;
             $role->descricao = $request->descricao;
             $role->save();
         } else {
-            alert()->success('Você não pode mudar um perfil de administrador', 'Good bye!');
+            alert()->info('Já existe um grupo com perfil administrador, ele possui todas as permissões liberadas
+            automaticamente, não é necessário criar outro.', 'Heey, você sabia?')->persistent('Ok, Entendi.');;
             return back();
         }
-        alert()->success('O Grupo' . $request->nome . 'foi cadastrado.', 'Salvo com sucesso!');
         alert('<h1>Grupo criado com sucesso!</h1> Deseja configurar as permissões de ' . $request->nome . ' agora? <a href="' . route('actionUpdate', $role->id) . '" >Sim <i class="glyphicon glyphicon-thumbs-up"></i> </a>')->persistent("Não, Obrigado");
         return back();
     }
@@ -67,7 +82,18 @@ class GruposDeAcessoController extends Controller
                 $request->nome <> 'Administrador' &
                 $request->nome <> 'administrador'
             ) {
+                /*Valida as informações se estao de acordo*/
+                $validator = Validator::make($request->all(), [
+                    'nome' => 'required|max:100',
+                    'descricao' => 'required',
+                ]);
+                /*Caso tenha erros, retorna com uma mensagem, e ao abrir o model e mostrado os dados digitados */
+                if ($validator->fails()) {
 
+                    return back()
+                        ->withErrors($validator)
+                        ->withInput();
+                }
                 $role = Role::find($request->roleId); /*Pesquisa o Grupo pelo ID */
                 $role->nome = $request->nome; /*Atualiza o nome conforme view de edição*/
                 $role->update();
@@ -88,20 +114,47 @@ class GruposDeAcessoController extends Controller
                 return back();
             } else {
                 /*Caso exista tentativa de usar nomes padrão (Admin, Admistrador, volta para Index.)*/
-                Alert::info('Não pode usar nomes como Admin ou Adminsitrador', 'Oops!');
+                Alert::info('Você não pode usar nomes como Admin ou Adminsitrador, já existe um grupo para essa funcionalidade.', 'Oops! Espere..')->persistent('Ok, Entendi.');
                 return back();
             }
         } else {
             /*Se o codigo for null ou o id for 1 de administreador, retorna para index (Não pode alterar administrador)*/
             if (empty($id) or $id == 1) {
-                Alert::info('Não é possivel editar um Administrador.', 'Oops!');
-                return redirect(route('actionIndex'));
+                Alert::info('Não é necessário editar um perfil administrador, 
+                ele já possui todas as permissões liberadas automaticamente.', 'Oops! você sabia?')->persistent('Ok, Entendi.');
+                return redirect(route('actionIndexRole'));
             }
             $role = Role::find($id); /*Pesquisa a Role pela ID passada pela URL */
             $permissionsGroups = (PermissionGroup::all()); /*Seleciona todos os Grupos de Permissões Ex: (CISS, COMPRAS..)*/
             return view('gruposdeacesso::roleUpdate', compact('role', 'permissionsGroups'));
         }
 
+    }
+
+    /**
+     * verifica se o codigo é de administrador, e se o mesmo possui usuarios relacionados, após isso é excluido ou
+     * retornado para view
+     * @return Response
+     */
+    public function actionDelete($id)
+    {
+       /*Verifica se esta sendo excluido um perfil de administrator*/
+        if($id == 1){
+            Alert::info('Você não pode excluir um perfil de administrator, ele é um grupo padrão do sistema. ', 'Heey, Espere!')->persistent('Ok, Entendi.');
+            return redirect(route('actionIndexRole'));
+        }
+        /*Verifica se ainda existem usuarios vinculados ao grupo,
+        caso não existe, é excluido as permissões vinculadas a role,
+        depois é excluido a role*/
+        if (DB::table('role_user')->where('role_id',$id)->count() <> 0 ){
+            DB::table('permission_role')->where('role_id',$id)->delete();
+            DB::table('roles')->where('id',$id)->delete();
+
+            Alert::success('', 'Excluido com sucesso!!');
+        }else{
+            Alert::info('Não foi possivel excluir, verifique se existem usuários relacionados a este grupo.', 'Verifique!')->persistent('Ok, Entendi.');
+        }
+        return redirect(route('actionIndexRole'));
     }
 
 

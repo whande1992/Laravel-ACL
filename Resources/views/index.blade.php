@@ -16,7 +16,7 @@
                     <div class="panel-body">
 
                         <a href="#" class="btn btn-app">
-                            <i class="fa  fa-plus" data-toggle="modal" data-target="#myModal"></i>
+                            <i class="fa  fa-plus text-green" data-toggle="modal" data-target="#myModal"></i>
                             Adicionar
                         </a>
 
@@ -45,8 +45,8 @@
                                                     <td>{{ $role->id }}</td>
                                                     <td>{{ $role->nome }}</td>
                                                     <td>{{ $role->descricao }}</td>
-                                                    <td><a class="btn btn-default" href="{{ route('actionUpdate',$role->id) }}"><i class="fa fa-lock" aria-hidden="true"></i> Permissões</a>  </td>
-                                                    <td><a class="btn btn-default" href="{{ '' }}"><i class="fa fa-delicious" aria-hidden="true"></i> Deletar </a>  </td>
+                                                    <td><a class="btn btn-default" href="{{ route('actionUpdateRole',$role->id) }}"><i class="fa fa-lock text-yellow" aria-hidden="true"></i> Permissões</a>  </td>
+                                                    <td><a class="btn btn-default" href="{{ route('actionDeleteRole',$role->id) }}"><i class="fa fa-trash-o text-red" aria-hidden="true"></i> Deletar </a>  </td>
                                                 </tr>
                                             @endforeach
                                         @endif
