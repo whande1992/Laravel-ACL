@@ -60,7 +60,8 @@ Mudar enabled para true.
     <!-- End SweetAlert -->
     
 10 - Configurar o layout principal app.blade.php, na linha 56
- @include('sweet::alert')'
+ 
+      @include('sweet::alert')'
  
  Na linha 44
  
