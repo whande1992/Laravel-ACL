@@ -71,7 +71,7 @@ Mudar enabled para true.
 
 9 - Carregar os arquivos em: Resources\views\layouts\adminlte\layouts\partials\htmlheader.blade.php
 
-```html
+```php
       <!-- SweetAlert -->
       <script src="{{asset('plugins/bower_components/sweetalert2/dist/sweetalert2.min.js')}} "></script>
       <link rel="stylesheet" type="text/css" href="{{asset('plugins/bower_components/sweetalert2/dist/sweetalert2.css')}} ">
