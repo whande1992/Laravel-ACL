@@ -12,58 +12,61 @@ Install
 2 - Adicionar Service Provider em config/app.php.
       
       'providers' => [
-               Nwidart\Modules\LaravelModulesServiceProvider::class,
+         Nwidart\Modules\LaravelModulesServiceProvider::class,
        ],
+
 3 - Adicionar em aliases :
 
-       'aliases' => [
-             'Module' => Nwidart\Modules\Facades\Module::class,
-       ],
+      'aliases' => [
+            'Module' => Nwidart\Modules\Facades\Module::class,
+      ],
        
        
 4 - Publicar        
        
-       php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"
+      php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"
        
        
 5 - Adicionar Modules no autoload do composer.json
        
-              {
-        "autoload": {
+      {
+       "autoload": {
        "psr-4": {
        "App\\": "app/",
        "Modules\\": "Modules/"
        }
-              }      
-                     }
+         }      
+           }
                      
 6 -  Modificar o arquivo Config\Modulos.php  scan: 
 Mudar enabled para true.
        
-       'scan' => [
-        'enabled' => true,
-        'paths' => [
-            base_path('vendor/*/*'),
+      'scan' => [
+       'enabled' => true,
+       'paths' => [
+        base_path('vendor/*/*'),
         ],
-    ],
+      ],
     
 
-7 - Instalar  https://github.com/uxweb/sweet-alert
+7 - Instalar SweetAlert 
+
+      https://github.com/uxweb/sweet-alert
 
 8 - Baixar o plugin do sweet-alert2 e jogar os arquivos na raiz do diretorio de \public\plugins
 
 9 - Carregar os arquivos em: Resources\views\layouts\adminlte\layouts\partials\htmlheader.blade.php
 
-    <!-- SweetAlert -->
-      <script src="{{asset('plugins/sweetalert2.min.js')}} "></script>
-      <link rel="stylesheet" type="text/css" href="{{asset('plugins/sweetalert2.css')}} ">
-    <!-- End SweetAlert -->
+      <!-- SweetAlert -->
+      <script src="{{asset('plugins/bower_components/sweetalert2/dist/sweetalert2.min.js')}} "></script>
+      <link rel="stylesheet" type="text/css" href="{{asset('plugins/bower_components/sweetalert2/dist/sweetalert2.css')}} ">
+      <!-- End SweetAlert -->
     
-10 - Configurar o layout principal app.blade.php, na linha 56
+10 - Configurar o layout principal app.blade.php, na linha 55 em baixo de @include('adminlte::layouts.partials.footer')
  
-      @include('sweet::alert')'
+      @include('sweet::alert')
  
- Na linha 44
+ Na linha 44 em baixo de  @include('adminlte::layouts.partials.contentheader')
  
       @if ($errors->any())
             <script>
