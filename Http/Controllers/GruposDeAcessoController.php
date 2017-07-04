@@ -146,7 +146,7 @@ class GruposDeAcessoController extends Controller
         /*Verifica se ainda existem usuarios vinculados ao grupo,
         caso não existe, é excluido as permissões vinculadas a role,
         depois é excluido a role*/
-        if (DB::table('role_user')->where('role_id',$id)->count() <> 0 ){
+        if (DB::table('role_user')->where('role_id',$id)->count() == 0 ){
             DB::table('permission_role')->where('role_id',$id)->delete();
             DB::table('roles')->where('id',$id)->delete();
 
