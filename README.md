@@ -4,6 +4,7 @@ Grupos de usuários e permissões de acesso para Laravel 5.4.
 Antes de instalar o modulo, é necessario ter o laravel funcionando, com o tema AdminLte instalado, não é necessario criar um usuario inicial, pois o modulo cria automaticamente um usuario administrador
 
 User: suporte@autmaster.com.br
+
 Senha: padrao autmaster
 
 
