@@ -17,16 +17,20 @@ Senha: padrao autmaster
       
 2 - Adicionar Service Provider em config/app.php.
       
+```php
       'providers' => [
-         Nwidart\Modules\LaravelModulesServiceProvider::class,
-       ],
+            Nwidart\Modules\LaravelModulesServiceProvider::class,
+      ],
+```
 
 3 - Adicionar em aliases :
 
-      'aliases' => [
-            'Module' => Nwidart\Modules\Facades\Module::class,
+```php
+   'aliases' => [
+           'Module' => Nwidart\Modules\Facades\Module::class,
       ],
-       
+```
+
        
 4 - Publicar        
        
@@ -34,7 +38,8 @@ Senha: padrao autmaster
        
        
 5 - Adicionar Modules no autoload do composer.json
-       
+
+```json       
       {
        "autoload": {
        "psr-4": {
@@ -43,16 +48,19 @@ Senha: padrao autmaster
        }
          }      
            }
+```end
                      
 6 -  Modificar o arquivo Config\Modulos.php  scan: 
 Mudar enabled para true.
-       
+
+```php
       'scan' => [
        'enabled' => true,
        'paths' => [
         base_path('vendor/*/*'),
         ],
       ],
+```end
     
 
 7 - Instalar SweetAlert 
