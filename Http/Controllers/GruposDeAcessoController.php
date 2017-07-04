@@ -63,7 +63,7 @@ class GruposDeAcessoController extends Controller
             automaticamente, não é necessário criar outro.', 'Heey, você sabia?')->persistent('Ok, Entendi.');;
             return back();
         }
-        alert('<h1>Grupo criado com sucesso!</h1> Deseja configurar as permissões de ' . $request->nome . ' agora? <a href="' . route('actionUpdate', $role->id) . '" >Sim <i class="glyphicon glyphicon-thumbs-up"></i> </a>')->persistent("Não, Obrigado");
+        alert('<h1>Grupo criado com sucesso!</h1> Deseja configurar as permissões de ' . $request->nome . ' agora? <a href="' . route('actionUpdateRole', $role->id) . '" >Sim <i class="glyphicon glyphicon-thumbs-up"></i> </a>')->persistent("Não, Obrigado");
         return back();
     }
 
