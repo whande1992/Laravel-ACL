@@ -67,7 +67,9 @@ Mudar enabled para true.
 
       https://github.com/uxweb/sweet-alert
 
-8 - Baixar o plugin do sweet-alert2 e jogar os arquivos na raiz do diretorio de \public\plugins
+8 - Navegar até o diretório \public\plugins e baixar o SweetAlert
+
+      $ bower install sweetalert2
 
 9 - Carregar os arquivos em: Resources\views\layouts\adminlte\layouts\partials\htmlheader.blade.php
 
