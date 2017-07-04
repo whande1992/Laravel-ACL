@@ -39,7 +39,7 @@ Senha: padrao autmaster
        
 5 - Adicionar Modules no autoload do composer.json
 
-```json       
+```php      
       {
        "autoload": {
        "psr-4": {
@@ -48,7 +48,7 @@ Senha: padrao autmaster
        }
          }      
            }
-```end
+```
                      
 6 -  Modificar o arquivo Config\Modulos.php  scan: 
 Mudar enabled para true.
@@ -60,7 +60,7 @@ Mudar enabled para true.
         base_path('vendor/*/*'),
         ],
       ],
-```end
+```
     
 
 7 - Instalar SweetAlert 
@@ -71,17 +71,22 @@ Mudar enabled para true.
 
 9 - Carregar os arquivos em: Resources\views\layouts\adminlte\layouts\partials\htmlheader.blade.php
 
+```html
       <!-- SweetAlert -->
       <script src="{{asset('plugins/bower_components/sweetalert2/dist/sweetalert2.min.js')}} "></script>
       <link rel="stylesheet" type="text/css" href="{{asset('plugins/bower_components/sweetalert2/dist/sweetalert2.css')}} ">
       <!-- End SweetAlert -->
+```
     
 10 - Configurar o layout principal app.blade.php, na linha 55 em baixo de @include('adminlte::layouts.partials.footer')
- 
+
+```php
       @include('sweet::alert')
+```
  
  Na linha 44 em baixo de  @include('adminlte::layouts.partials.contentheader')
- 
+
+```php
       @if ($errors->any())
             <script>
                 swal(   'Atenção!',
@@ -90,12 +95,14 @@ Mudar enabled para true.
                     )
             </script>
         @endif
-  
+```
 
 11 - Configurar o acesso ao banco de dados e a engine do banco config\database mysql. 
 
+```php
       engine' => 'InnoDB',
-      
+```
+
 12 - Rodar as migrações normais (para criar a tabela de usrs na primeira instalação)
 
       php artisan migrate
